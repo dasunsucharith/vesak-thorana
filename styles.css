@@ -16,8 +16,7 @@ body {
     justify-content: center;
     align-items: center;
     font-family: system-ui, sans-serif;
-    background: url('background_vesak.png') no-repeat center center fixed;
-    background-size: cover; /* Ensures the image covers the entire background */
+    background: #000; /* Set a solid black background */
     position: relative;
 }
 
