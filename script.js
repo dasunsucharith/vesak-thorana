@@ -1,3 +1,53 @@
+document.addEventListener('DOMContentLoaded', () => {
+    const audio = document.getElementById('background-audio');
+    
+    // Create container for audio controls
+    const controlsContainer = document.createElement('div');
+    controlsContainer.className = 'audio-controls';
+    
+    // Create play button
+    const playButton = document.createElement('button');
+    playButton.className = 'control-button play';
+    playButton.innerHTML = '▶️';
+    
+    // Create pause button
+    const pauseButton = document.createElement('button');
+    pauseButton.className = 'control-button pause';
+    pauseButton.innerHTML = '⏸️';
+    
+    // Add click handlers
+    playButton.onclick = () => {
+        audio.play();
+        playButton.style.display = 'none';
+        pauseButton.style.display = 'flex';
+    };
+    
+    pauseButton.onclick = () => {
+        audio.pause();
+        pauseButton.style.display = 'none';
+        playButton.style.display = 'flex';
+    };
+    
+    // Initially hide pause button
+    pauseButton.style.display = 'none';
+    
+    // Add buttons to container
+    controlsContainer.appendChild(playButton);
+    controlsContainer.appendChild(pauseButton);
+    document.body.appendChild(controlsContainer);
+    
+    // Try to play audio on page load
+    const playPromise = audio.play();
+    
+    if (playPromise !== undefined) {
+        playPromise.catch(error => {
+            // Auto-play was prevented
+            playButton.style.display = 'flex';
+            pauseButton.style.display = 'none';
+        });
+    }
+});
+
 const rows = 120,
 	cols = 120,
 	total = rows * cols;
