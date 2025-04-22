@@ -1,0 +1,63 @@
+:root {
+    --pixel: 3px;
+    --gap: 1px;
+    --off: #080808;
+    background: #000;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+}
+
+body {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: system-ui, sans-serif;
+    background: url('background_vesak.png') no-repeat center center fixed;
+    background-size: cover; /* Ensures the image covers the entire background */
+    position: relative;
+}
+
+.container {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#image-overlay {
+    position: absolute;
+    top: 95%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 10;
+    /* Size can be adjusted based on your needs */
+    width: 80%;
+    height: auto;
+    pointer-events: none;
+    /* Allow clicks to pass through to the LEDs */
+}
+
+#circle {
+    width: calc(var(--pixel) * 120 + var(--gap) * 119);
+    height: calc(var(--pixel) * 120 + var(--gap) * 119);
+    border-radius: 50%;
+    overflow: hidden;
+    display: grid;
+    gap: var(--gap);
+    grid-template-columns: repeat(120, var(--pixel));
+    grid-template-rows: repeat(120, var(--pixel));
+    position: relative;
+}
+
+.led {
+    width: var(--pixel);
+    height: var(--pixel);
+    border-radius: 50%;
+    background: var(--off);
+    transition: background 50ms linear;
+    /* Faster and smoother transition */
+}
