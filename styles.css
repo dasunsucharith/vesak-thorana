@@ -50,6 +50,8 @@ body {
     grid-template-columns: repeat(120, var(--pixel));
     grid-template-rows: repeat(120, var(--pixel));
     position: relative;
+    background: #000; /* Black background */
+    box-shadow: 0 0 10px 2px rgba(255, 255, 255, 0.5); /* White shadow */
 }
 
 .led {
