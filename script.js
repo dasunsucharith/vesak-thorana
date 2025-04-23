@@ -46,7 +46,65 @@ document.addEventListener('DOMContentLoaded', () => {
             pauseButton.style.display = 'none';
         });
     }
+
+    setupLotusAnimation();
 });
+
+function setupLotusAnimation() {
+    const lotusContainer = document.getElementById('lotus-container');
+    const frames = 4;
+    let currentFrame = 0;
+    let isAnimating = true;
+    let animationInterval;
+
+    // Create image elements for each frame
+    for (let i = 1; i <= frames; i++) {
+        const img = document.createElement('img');
+        img.src = `lotus-animation/lotus_${i}.png`;
+        img.className = `lotus-frame ${i === 1 ? 'active' : ''}`;
+        lotusContainer.appendChild(img);
+    }
+
+    function animateFrame() {
+        if (!isAnimating) return;
+
+        const frameElements = lotusContainer.getElementsByClassName('lotus-frame');
+        // Hide current frame
+        frameElements[currentFrame].classList.remove('active');
+        // Move to next frame
+        currentFrame = (currentFrame + 1) % frames;
+        // Show new frame
+        frameElements[currentFrame].classList.add('active');
+    }
+
+    // Use requestAnimationFrame for smoother animation
+    let lastFrameTime = 0;
+    const frameInterval = 300; // 300ms between frames
+
+    function animate(currentTime) {
+        if (!lastFrameTime) lastFrameTime = currentTime;
+
+        if (currentTime - lastFrameTime >= frameInterval) {
+            animateFrame();
+            lastFrameTime = currentTime;
+        }
+
+        if (isAnimating) {
+            requestAnimationFrame(animate);
+        }
+    }
+
+    // Start animation
+    requestAnimationFrame(animate);
+
+    // Optional: Toggle animation function
+    function toggleAnimation() {
+        isAnimating = !isAnimating;
+        if (isAnimating) {
+            requestAnimationFrame(animate);
+        }
+    }
+}
 
 const rows = 120,
 	cols = 120,

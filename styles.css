@@ -1,97 +1,145 @@
 :root {
-    --pixel: 3px;
-    --gap: 1px;
-    --off: #080808;
-    background: #000;
+	--pixel: 3px;
+	--gap: 1px;
+	--off: #080808;
+	background: #000;
 }
 
 * {
-    box-sizing: border-box;
-    margin: 0;
+	box-sizing: border-box;
+	margin: 0;
 }
 
 body {
-    min-height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-family: system-ui, sans-serif;
-    background: #000; /* Set a solid black background */
-    position: relative;
+	min-height: 100vh;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	font-family: system-ui, sans-serif;
+	background: #000; /* Set a solid black background */
+	position: relative;
 }
 
 .container {
-    position: relative;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+	position: relative;
+	display: flex;
+	justify-content: center;
+	align-items: center;
 }
 
 #image-overlay {
-    position: absolute;
-    top: 95%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    z-index: 10;
-    /* Size can be adjusted based on your needs */
-    width: 80%;
-    height: auto;
-    pointer-events: none;
-    /* Allow clicks to pass through to the LEDs */
+	position: absolute;
+	top: 95%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	z-index: 10;
+	/* Size can be adjusted based on your needs */
+	width: 80%;
+	height: auto;
+	pointer-events: none;
+	/* Allow clicks to pass through to the LEDs */
 }
 
 #circle {
-    width: calc(var(--pixel) * 120 + var(--gap) * 119);
-    height: calc(var(--pixel) * 120 + var(--gap) * 119);
-    border-radius: 50%;
-    overflow: hidden;
-    display: grid;
-    gap: var(--gap);
-    grid-template-columns: repeat(120, var(--pixel));
-    grid-template-rows: repeat(120, var(--pixel));
-    position: relative;
-    background: #000; /* Black background */
-    box-shadow: 0 0 10px 2px rgba(255, 255, 255, 0.5); /* White shadow */
+	width: calc(var(--pixel) * 120 + var(--gap) * 119);
+	height: calc(var(--pixel) * 120 + var(--gap) * 119);
+	border-radius: 50%;
+	overflow: hidden;
+	display: grid;
+	gap: var(--gap);
+	grid-template-columns: repeat(120, var(--pixel));
+	grid-template-rows: repeat(120, var(--pixel));
+	position: relative;
+	background: #000; /* Black background */
+	box-shadow: 0 0 10px 2px rgba(255, 255, 255, 0.5); /* White shadow */
 }
 
 .led {
-    width: var(--pixel);
-    height: var(--pixel);
-    border-radius: 50%;
-    background: var(--off);
-    transition: background 50ms linear;
-    /* Faster and smoother transition */
+	width: var(--pixel);
+	height: var(--pixel);
+	border-radius: 50%;
+	background: var(--off);
+	transition: background 50ms linear;
+	/* Faster and smoother transition */
 }
 
 .audio-controls {
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    display: flex;
-    gap: 10px;
-    z-index: 1000;
+	position: fixed;
+	bottom: 20px;
+	right: 20px;
+	display: flex;
+	gap: 10px;
+	z-index: 1000;
 }
 
 .control-button {
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    border: none;
-    background-color: rgba(0, 0, 0, 0.7);
-    color: white;
-    font-size: 20px;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    box-shadow: 0 0 10px 2px rgba(255, 255, 255, 0.3);
-    transition: transform 0.2s ease;
+	width: 40px;
+	height: 40px;
+	border-radius: 50%;
+	border: none;
+	background-color: rgba(0, 0, 0, 0.7);
+	color: white;
+	font-size: 20px;
+	cursor: pointer;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	box-shadow: 0 0 10px 2px rgba(255, 255, 255, 0.3);
+	transition: transform 0.2s ease;
 }
 
 .control-button:hover {
-    transform: scale(1.1);
+	transform: scale(1.1);
 }
 
 .control-button:active {
-    transform: scale(0.95);
+	transform: scale(0.95);
+}
+
+#lotus-container {
+	position: absolute;
+	top: 0%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	width: 200px; /* Adjust based on your lotus image size */
+	height: 200px; /* Adjust based on your lotus image size */
+	z-index: 15; /* Higher than image-overlay (10) */
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	pointer-events: none;
+}
+
+.lotus-frame {
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	opacity: 0;
+	transition: opacity 0.15s linear;
+	will-change: opacity;
+	backface-visibility: hidden;
+	transform: translateZ(0);
+}
+
+.lotus-frame.active {
+	opacity: 1;
+}
+
+/* Add this with your other animations */
+@keyframes lotusBloom {
+	0% {
+		background-image: url("lotus-animation/lotus_1.png");
+	}
+	25% {
+		background-image: url("lotus-animation/lotus_2.png");
+	}
+	50% {
+		background-image: url("lotus-animation/lotus_3.png");
+	}
+	75% {
+		background-image: url("lotus-animation/lotus_4.png");
+	}
+	100% {
+		background-image: url("lotus-animation/lotus_1.png");
+	}
 }
